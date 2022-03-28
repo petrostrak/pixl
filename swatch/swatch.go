@@ -3,6 +3,8 @@ package swatch
 import (
 	"image/color"
 
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/widget"
 	"github.com/petrostrak/pixl/apptype"
 )
@@ -32,4 +34,15 @@ func NewSwatch(state *apptype.State, color color.Color, swatchIndex int, clickHd
 	swatch.ExtendBaseWidget(swatch)
 
 	return swatch
+}
+
+func (s *Swatch) CreateRenderer() fyne.WidgetRenderer {
+	square := canvas.NewRectangle(s.Color)
+	objects := []fyne.CanvasObject{s}
+
+	return &SwatchRenderer{
+		square:  *square,
+		objects: objects,
+		parent:  s,
+	}
 }
