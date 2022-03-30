@@ -2,6 +2,7 @@ package pxcanvas
 
 import (
 	"image"
+	"image/color"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/widget"
@@ -40,4 +41,16 @@ func InBounds(pos fyne.Position, bounds image.Rectangle) bool {
 	}
 
 	return false
+}
+
+func NewBlankImage(cols, rows int, c color.Color) image.Image {
+	img := image.NewNRGBA(image.Rect(0, 0, cols, rows))
+
+	for y := 0; y < rows; y++ {
+		for x := 0; x < cols; x++ {
+			img.Set(x, y, c)
+		}
+	}
+
+	return img
 }
