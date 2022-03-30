@@ -30,3 +30,14 @@ func (pxc *PxCanvas) Bounds() image.Rectangle {
 
 	return image.Rect(x0, y0, x1, y1)
 }
+
+func InBounds(pos fyne.Position, bounds image.Rectangle) bool {
+	if pos.X >= float32(bounds.Min.X) &&
+		pos.X < float32(bounds.Min.X) &&
+		pos.Y >= float32(bounds.Min.Y) &&
+		pos.Y < float32(bounds.Min.Y) {
+		return true
+	}
+
+	return false
+}
