@@ -21,3 +21,12 @@ type PxCanvas struct {
 	appState    *apptype.State
 	reloadImage bool
 }
+
+func (pxc *PxCanvas) Bounds() image.Rectangle {
+	x0 := int(pxc.CanvasOffset.X)
+	y0 := int(pxc.CanvasOffset.Y)
+	x1 := int(pxc.PxCols*pxc.PxSize + int(pxc.CanvasOffset.X))
+	y1 := int(pxc.PxRows*pxc.PxSize + int(pxc.CanvasOffset.Y))
+
+	return image.Rect(x0, y0, x1, y1)
+}
