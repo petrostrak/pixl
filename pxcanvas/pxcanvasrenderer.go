@@ -33,7 +33,10 @@ func (r *PxCanvasRenderer) Objects() []fyne.CanvasObject {
 func (r *PxCanvasRenderer) Destroy() {}
 
 // WidgetRenderer interface implementation
-func (r *PxCanvasRenderer) Layout(size fyne.Size) {}
+func (r *PxCanvasRenderer) Layout(size fyne.Size) {
+	r.LayoutCanvas(size)
+	r.LayoutBorder(size)
+}
 
 func (r *PxCanvasRenderer) LayoutCanvas(size fyne.Size) {
 	imgPxWidth := r.pxCanvas.PxCols
