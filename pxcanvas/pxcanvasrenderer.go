@@ -43,3 +43,25 @@ func (r *PxCanvasRenderer) LayoutCanvas(size fyne.Size) {
 	r.canvasImage.Move(fyne.NewPos(r.pxCanvas.CanvasOffset.X, r.pxCanvas.CanvasOffset.Y))
 	r.canvasImage.Resize(fyne.NewSize(float32(imgPxWidth*pxSize), float32(imgPxHeight*pxSize)))
 }
+
+func (r *PxCanvasRenderer) LayoutBorder(size fyne.Size) {
+	offset := r.pxCanvas.CanvasOffset
+	imgHeight := r.canvasImage.Size().Height
+	imgWidth := r.canvasImage.Size().Width
+
+	left := &r.canvasBorder[0]
+	left.Position1 = fyne.NewPos(offset.X, offset.Y)
+	left.Position2 = fyne.NewPos(offset.X, offset.Y+imgHeight)
+
+	top := &r.canvasBorder[1]
+	top.Position1 = fyne.NewPos(offset.X, offset.Y)
+	top.Position2 = fyne.NewPos(offset.X+imgWidth, offset.Y)
+
+	right := &r.canvasBorder[2]
+	right.Position1 = fyne.NewPos(offset.X+imgWidth, offset.Y)
+	right.Position2 = fyne.NewPos(offset.X+imgWidth, offset.Y+imgHeight)
+
+	bottom := &r.canvasBorder[3]
+	bottom.Position1 = fyne.NewPos(offset.X, offset.Y+imgHeight)
+	bottom.Position2 = fyne.NewPos(offset.X+imgWidth, offset.Y+imgHeight)
+}
