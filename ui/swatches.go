@@ -10,10 +10,10 @@ import (
 
 func BuildSwatches(a *AppInit) *fyne.Container {
 	canvasSwatches := make([]fyne.CanvasObject, 0, 64)
-	for i := 0; i < cap(a.Swatches); i++ {
+	for i := range a.Swatches {
 		initialColor := color.NRGBA{255, 255, 255, 255}
 		s := swatch.NewSwatch(a.State, initialColor, i, func(s *swatch.Swatch) {
-			for j := 0; j < len(a.Swatches); j++ {
+			for j := range a.Swatches {
 				a.Swatches[j].Selected = false
 				canvasSwatches[j].Refresh()
 			}
