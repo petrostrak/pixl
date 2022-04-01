@@ -28,6 +28,6 @@ func (s *State) SetFilePath(path string) {
 }
 
 type Brushable interface {
-	SetColoer(color.Color, int, int)
+	SetColor(color.Color, int, int)
 	MouseToCanvasXY(*desktop.MouseEvent) (*int, *int)
 }
