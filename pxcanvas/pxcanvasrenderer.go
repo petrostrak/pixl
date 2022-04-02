@@ -9,6 +9,11 @@ type PxCanvasRenderer struct {
 	pxCanvas     *PxCanvas
 	canvasImage  *canvas.Image
 	canvasBorder []canvas.Line
+	canvasCursor []fyne.CanvasObject
+}
+
+func (r *PxCanvasRenderer) SetCursor(objects []fyne.CanvasObject) {
+	r.canvasCursor = objects
 }
 
 // WidgetRenderer interface implementation
@@ -25,6 +30,7 @@ func (r *PxCanvasRenderer) Objects() []fyne.CanvasObject {
 	}
 
 	objects = append(objects, r.canvasImage)
+	objects = append(objects, r.canvasCursor...)
 
 	return objects
 }
