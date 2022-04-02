@@ -31,7 +31,7 @@ func Cursor(config apptype.PxCanvasConfig, brush apptype.BrushType, ev *desktop.
 		top := canvas.NewLine(cursorColor)
 		top.StrokeWidth = 3
 		top.Position1 = fyne.NewPos(xOrigin, yOrigin)
-		top.Position2 = fyne.NewPos(xOrigin+pxSize, yOrigin+pxSize)
+		top.Position2 = fyne.NewPos(xOrigin+pxSize, yOrigin)
 
 		right := canvas.NewLine(cursorColor)
 		right.StrokeWidth = 3
