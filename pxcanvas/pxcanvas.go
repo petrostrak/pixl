@@ -125,3 +125,14 @@ func (pxCanvas *PxCanvas) MouseToCanvasXY(ev *desktop.MouseEvent) (*int, *int) {
 
 	return &x, &y
 }
+
+func (pxCanvas *PxCanvas) LoadImage(img image.Image) {
+	dimensions := img.Bounds()
+
+	pxCanvas.PxCanvasConfig.PxCols = dimensions.Dx()
+	pxCanvas.PxCanvasConfig.PxRows = dimensions.Dy()
+
+	pxCanvas.PixelData = img
+	pxCanvas.reloadImage = true
+	pxCanvas.Refresh()
+}
