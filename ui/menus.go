@@ -54,3 +54,10 @@ func BuildNewMenu(app *AppInit) *fyne.MenuItem {
 		}, app.PixlWindow)
 	})
 }
+
+func BuildMenus(app *AppInit) *fyne.Menu {
+	return fyne.NewMenu(
+		"File",
+		BuildNewMenu(app),
+	)
+}
