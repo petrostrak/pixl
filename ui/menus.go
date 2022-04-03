@@ -61,3 +61,9 @@ func BuildMenus(app *AppInit) *fyne.Menu {
 		BuildNewMenu(app),
 	)
 }
+
+func Setupmenus(app *AppInit) {
+	menus := BuildMenus(app)
+	mainMenu := fyne.NewMainMenu(menus)
+	app.PixlWindow.SetMainMenu(mainMenu)
+}
