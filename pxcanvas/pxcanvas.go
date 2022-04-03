@@ -136,3 +136,11 @@ func (pxCanvas *PxCanvas) LoadImage(img image.Image) {
 	pxCanvas.reloadImage = true
 	pxCanvas.Refresh()
 }
+
+func (pxCanvas *PxCanvas) NewDrawing(cols, rows int) {
+	pxCanvas.appState.SetFilePath("")
+	pxCanvas.PxCols = cols
+	pxCanvas.PxRows = rows
+	pixelData := NewBlankImage(cols, rows, color.NRGBA{128, 128, 128, 255})
+	pxCanvas.LoadImage(pixelData)
+}
