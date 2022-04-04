@@ -3,6 +3,7 @@ package ui
 import (
 	"errors"
 	"image/png"
+	"os"
 	"strconv"
 
 	"fyne.io/fyne/v2"
@@ -28,6 +29,35 @@ func saveFileDialog(app *AppInit) {
 func BuildSaveAsMenu(app *AppInit) *fyne.MenuItem {
 	return fyne.NewMenuItem("Save As...", func() {
 		saveFileDialog(app)
+	})
+}
+
+func BuildSaveMenu(app *AppInit) *fyne.MenuItem {
+	return fyne.NewMenuItem("Save", func() {
+		if app.State.FilePath == "" {
+			saveFileDialog(app)
+		} else {
+			tryClose := func(fh *os.File) {
+				err := fh.Close()
+				if err != nil {
+					dialog.ShowError(err, app.PixlWindow)
+				}
+			}
+
+			fh, err := os.Create(app.State.FilePath)
+			defer tryClose(fh)
+
+			if err != nil {
+				dialog.ShowError(err, app.PixlWindow)
+				return
+			}
+
+			err = png.Encode(fh, app.PixlCanvas.PixelData)
+			if err != nil {
+				dialog.ShowError(err, app.PixlWindow)
+				return
+			}
+		}
 	})
 }
 
