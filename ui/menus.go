@@ -2,6 +2,7 @@ package ui
 
 import (
 	"errors"
+	"image"
 	"image/png"
 	"os"
 	"strconv"
@@ -9,6 +10,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
+	"github.com/petrostrak/pixl/util"
 )
 
 func saveFileDialog(app *AppInit) {
@@ -102,6 +104,33 @@ func BuildNewMenu(app *AppInit) *fyne.MenuItem {
 					pixelWidth, _ = strconv.Atoi(heightEntry.Text)
 				}
 				app.PixlCanvas.NewDrawing(pixelWidth, pixelHeight)
+			}
+		}, app.PixlWindow)
+	})
+}
+
+func BuildOpenMenu(app *AppInit) *fyne.MenuItem {
+	return fyne.NewMenuItem("Open...", func() {
+		dialog.ShowFileOpen(func(uri fyne.URIReadCloser, err error) {
+			if uri == nil {
+				return
+			} else {
+				image, _, err := image.Decode(uri)
+				if err != nil {
+					dialog.ShowError(err, app.PixlWindow)
+					return
+				}
+				app.PixlCanvas.LoadImage(image)
+				app.State.SetFilePath(uri.URI().Path())
+				imgColors := util.GetImageColors(image)
+				i := 0
+				for c := range imgColors {
+					if i == len(app.Swatches) {
+						break
+					}
+					app.Swatches[i].SetColor(c)
+					i++
+				}
 			}
 		}, app.PixlWindow)
 	})
