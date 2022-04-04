@@ -25,6 +25,12 @@ func saveFileDialog(app *AppInit) {
 	}, app.PixlWindow)
 }
 
+func BuildSaveAsMenu(app *AppInit) *fyne.MenuItem {
+	return fyne.NewMenuItem("Save As...", func() {
+		saveFileDialog(app)
+	})
+}
+
 func BuildNewMenu(app *AppInit) *fyne.MenuItem {
 	return fyne.NewMenuItem("New", func() {
 		sizeValidator := func(s string) error {
