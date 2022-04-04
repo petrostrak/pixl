@@ -8,26 +8,24 @@ import (
 	"github.com/petrostrak/pixl/swatch"
 )
 
-func BuildSwatches(a *AppInit) *fyne.Container {
+func BuildSwatches(app *AppInit) *fyne.Container {
 	canvasSwatches := make([]fyne.CanvasObject, 0, 64)
-	for i := range a.Swatches {
+	for i := 0; i < cap(app.Swatches); i++ {
 		initialColor := color.NRGBA{255, 255, 255, 255}
-		s := swatch.NewSwatch(a.State, initialColor, i, func(s *swatch.Swatch) {
-			for j := range a.Swatches {
-				a.Swatches[j].Selected = false
+		s := swatch.NewSwatch(app.State, initialColor, i, func(s *swatch.Swatch) {
+			for j := 0; j < len(app.Swatches); j++ {
+				app.Swatches[j].Selected = false
 				canvasSwatches[j].Refresh()
 			}
-			a.State.SwatchSelected = s.SwatchIndex
-			a.State.BrushColor = s.Color
+			app.State.SwatchSelected = s.SwatchIndex
+			app.State.BrushColor = s.Color
 		})
-
 		if i == 0 {
 			s.Selected = true
-			a.State.SwatchSelected = 0
+			app.State.SwatchSelected = 0
 			s.Refresh()
 		}
-
-		a.Swatches = append(a.Swatches, s)
+		app.Swatches = append(app.Swatches, s)
 		canvasSwatches = append(canvasSwatches, s)
 	}
 

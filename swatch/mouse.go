@@ -2,12 +2,10 @@ package swatch
 
 import "fyne.io/fyne/v2/driver/desktop"
 
-func (s *Swatch) MouseDown(ev *desktop.MouseEvent) {
-	s.clickHandler(s)
-	s.Selected = true
-	s.Refresh()
+func (swatch *Swatch) MouseDown(ev *desktop.MouseEvent) {
+	swatch.clickHandler(swatch)
+	swatch.Selected = true
+	swatch.Refresh()
 }
 
-func (s *Swatch) MouseUp(ev *desktop.MouseEvent) {
-
-}
+func (swatch *Swatch) MouseUp(ev *desktop.MouseEvent) {}

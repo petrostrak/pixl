@@ -13,7 +13,7 @@ const (
 	Pixel = iota
 )
 
-func Cursor(config apptype.PxCanvasConfig, brush apptype.BrushType, ev *desktop.MouseEvent, x, y int) []fyne.CanvasObject {
+func Cursor(config apptype.PxCanvasConfig, brush apptype.BrushType, ev *desktop.MouseEvent, x int, y int) []fyne.CanvasObject {
 	var objects []fyne.CanvasObject
 	switch {
 	case brush == Pixel:
@@ -45,7 +45,6 @@ func Cursor(config apptype.PxCanvasConfig, brush apptype.BrushType, ev *desktop.
 
 		objects = append(objects, left, top, right, bottom)
 	}
-
 	return objects
 }
 
@@ -64,6 +63,5 @@ func TryPaintPixel(appState *apptype.State, canvas apptype.Brushable, ev *deskto
 		canvas.SetColor(appState.BrushColor, *x, *y)
 		return true
 	}
-
 	return false
 }

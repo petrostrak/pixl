@@ -9,14 +9,12 @@ import (
 	"github.com/petrostrak/pixl/apptype"
 )
 
-type clickHandler func(*Swatch)
-
 type Swatch struct {
 	widget.BaseWidget
-	Selected    bool
-	Color       color.Color
-	SwatchIndex int
-	clickHandler
+	Selected     bool
+	Color        color.Color
+	SwatchIndex  int
+	clickHandler func(s *Swatch)
 }
 
 func (s *Swatch) SetColor(c color.Color) {
@@ -24,25 +22,23 @@ func (s *Swatch) SetColor(c color.Color) {
 	s.Refresh()
 }
 
-func NewSwatch(state *apptype.State, color color.Color, swatchIndex int, clickHdlr clickHandler) *Swatch {
+func NewSwatch(state *apptype.State, color color.Color, swatchIndex int, clickHandler func(s *Swatch)) *Swatch {
 	swatch := &Swatch{
 		Selected:     false,
 		Color:        color,
-		clickHandler: clickHdlr,
+		clickHandler: clickHandler,
 		SwatchIndex:  swatchIndex,
 	}
 	swatch.ExtendBaseWidget(swatch)
-
 	return swatch
 }
 
-func (s *Swatch) CreateRenderer() fyne.WidgetRenderer {
-	square := canvas.NewRectangle(s.Color)
-	objects := []fyne.CanvasObject{s}
-
+func (swatch *Swatch) CreateRenderer() fyne.WidgetRenderer {
+	square := canvas.NewRectangle(swatch.Color)
+	objects := []fyne.CanvasObject{square}
 	return &SwatchRenderer{
 		square:  *square,
 		objects: objects,
-		parent:  s,
+		parent:  swatch,
 	}
 }

@@ -15,7 +15,6 @@ type PxCanvasConfig struct {
 	PxRows, PxCols int
 	PxSize         int
 }
-
 type State struct {
 	BrushColor     color.Color
 	BrushType      int
@@ -23,11 +22,11 @@ type State struct {
 	FilePath       string
 }
 
-func (s *State) SetFilePath(path string) {
-	s.FilePath = path
+func (state *State) SetFilePath(path string) {
+	state.FilePath = path
 }
 
 type Brushable interface {
-	SetColor(color.Color, int, int)
-	MouseToCanvasXY(*desktop.MouseEvent) (*int, *int)
+	SetColor(c color.Color, x, y int)
+	MouseToCanvasXY(ev *desktop.MouseEvent) (*int, *int)
 }

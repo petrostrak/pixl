@@ -13,6 +13,5 @@ func GetImageColors(img image.Image) map[color.Color]struct{} {
 			colors[img.At(x, y)] = empty
 		}
 	}
-
 	return colors
 }

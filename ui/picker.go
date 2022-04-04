@@ -14,6 +14,5 @@ func SetupColorPicker(app *AppInit) *fyne.Container {
 		app.State.BrushColor = c
 		app.Swatches[app.State.SwatchSelected].SetColor(c)
 	})
-
 	return container.NewVBox(picker)
 }
