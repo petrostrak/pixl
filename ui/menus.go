@@ -140,6 +140,7 @@ func BuildMenus(app *AppInit) *fyne.Menu {
 	return fyne.NewMenu(
 		"File",
 		BuildNewMenu(app),
+		BuildOpenMenu(app),
 		BuildSaveMenu(app),
 		BuildSaveAsMenu(app),
 	)
