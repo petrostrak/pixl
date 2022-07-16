@@ -10,7 +10,7 @@ build:
 
 ## run: builds and runs the application
 run:
-	go run pixl/pixl.go
+	go run main.go
 
 ## clean: runs go clean and deletes binaries
 clean:
