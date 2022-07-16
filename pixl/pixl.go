@@ -39,5 +39,6 @@ func main() {
 
 	ui.Setup(&appInit)
 
+	appInit.PixlWindow.CenterOnScreen()
 	appInit.PixlWindow.ShowAndRun()
 }
